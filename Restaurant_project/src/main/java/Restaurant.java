@@ -83,4 +83,10 @@ public class Restaurant {
         return name;
     }
 
+    public int getOrderCost(List<Item> menuSelectedByUser) {
+        return 0;
+    }
+
+	
+
 }

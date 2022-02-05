@@ -1,13 +1,18 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
+
+    List<Item> menuSelectedByUser = new ArrayList<Item>();
     //REFACTOR ALL THE REPEATED LINES OF CODE
+
+
     
     @BeforeEach
     public void restaurantInformation(){
@@ -70,4 +75,35 @@ class RestaurantTest {
       
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>ORDER SUMMARY COST<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void order_cost_should_be_total_cost_when_all_items_selected(){
+
+        menuSelectedByUser = restaurant.getMenu();
+        
+        assertEquals(388,restaurant.getOrderCost(menuSelectedByUser));
+     
+    }
+
+    @Test
+    public void order_cost_should_reduce_total_cost_when_an_item_gets_removed(){
+
+        menuSelectedByUser = restaurant.getMenu();
+        int totalOrderCost = restaurant.getOrderCost(menuSelectedByUser);
+        int singleItemCost =menuSelectedByUser.get(1).getPrice();
+        menuSelectedByUser.remove(1);
+        
+        assertEquals(totalOrderCost-singleItemCost,restaurant.getOrderCost(menuSelectedByUser));
+     
+    }
+
+
+
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER SUMMARY COST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 }
